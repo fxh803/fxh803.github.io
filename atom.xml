@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-09T11:44:53.554Z</updated>
+  <updated>2023-01-09T16:44:34.157Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2023/01/09/hello-world/"/>
     <id>http://example.com/2023/01/09/hello-world/</id>
     <published>2023-01-09T11:47:34.899Z</published>
-    <updated>2023-01-09T11:44:53.554Z</updated>
+    <updated>2023-01-09T16:44:34.157Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
@@ -33,6 +33,12 @@
     
     
     
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+    <category term="markdown模板" scheme="http://example.com/tags/markdown%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
@@ -41,7 +47,7 @@
     <link href="http://example.com/2023/01/09/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/"/>
     <id>http://example.com/2023/01/09/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/</id>
     <published>2023-01-08T16:00:00.000Z</published>
-    <updated>2023-01-09T16:02:08.983Z</updated>
+    <updated>2023-01-09T16:44:21.430Z</updated>
     
     <content type="html"><![CDATA[<h3 id="我是如何搭建我的博客的？"><a href="#我是如何搭建我的博客的？" class="headerlink" title="我是如何搭建我的博客的？"></a>我是如何搭建我的博客的？</h3><p>跟随教程: <a href="https://blog.csdn.net/qq_36759224/article/details/82121420?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167326114016800215046641%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167326114016800215046641&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-1-82121420-null-null.142%5Ev70%5Eone_line,201%5Ev4%5Eadd_ask&utm_term=github%20pages&spm=1018.2226.3001.4187">csdn</a></p><h3 id="评论设置？"><a href="#评论设置？" class="headerlink" title="评论设置？"></a>评论设置？</h3><p>valine: <a href="https://valine.js.org/">valine</a><br>leancloud: <a href="https://console.leancloud.cn/apps">leancloud</a></p>]]></content>
     
@@ -53,6 +59,10 @@
     
     
     
+    <category term="学习" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="博客搭建" scheme="http://example.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
