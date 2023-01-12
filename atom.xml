@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="https://fxh803.github.io/atom.xml" rel="self"/>
+  <link href="https://fxhblog.com/atom.xml" rel="self"/>
   
-  <link href="https://fxh803.github.io/"/>
+  <link href="https://fxhblog.com/"/>
   <updated>2023-01-09T16:44:34.157Z</updated>
-  <id>https://fxh803.github.io/</id>
+  <id>https://fxhblog.com/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://fxh803.github.io/2023/01/09/hello-world/"/>
-    <id>https://fxh803.github.io/2023/01/09/hello-world/</id>
+    <link href="https://fxhblog.com/2023/01/09/hello-world/"/>
+    <id>https://fxhblog.com/2023/01/09/hello-world/</id>
     <published>2023-01-09T11:47:34.899Z</published>
     <updated>2023-01-09T16:44:34.157Z</updated>
     
@@ -33,19 +33,19 @@
     
     
     
-    <category term="学习" scheme="https://fxh803.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://fxhblog.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="hexo" scheme="https://fxh803.github.io/tags/hexo/"/>
+    <category term="hexo" scheme="https://fxhblog.com/tags/hexo/"/>
     
-    <category term="markdown模板" scheme="https://fxh803.github.io/tags/markdown%E6%A8%A1%E6%9D%BF/"/>
+    <category term="markdown模板" scheme="https://fxhblog.com/tags/markdown%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
   <entry>
     <title>第一篇博客</title>
-    <link href="https://fxh803.github.io/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://fxh803.github.io/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+    <link href="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
     <published>2023-01-08T16:00:00.000Z</published>
     <updated>2023-01-10T16:31:04.520Z</updated>
     
@@ -59,10 +59,10 @@
     
     
     
-    <category term="学习" scheme="https://fxh803.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    <category term="学习" scheme="https://fxhblog.com/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="博客搭建" scheme="https://fxh803.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <category term="博客搭建" scheme="https://fxhblog.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
     
   </entry>
   
