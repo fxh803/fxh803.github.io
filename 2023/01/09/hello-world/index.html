@@ -44,9 +44,9 @@
 
   
   
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
   
   
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -406,7 +406,7 @@
     
   <section id="comments">
   	
-           
+
     
   </section>
 
@@ -509,24 +509,24 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: 'e725cb4a126e7d40a387',
-    clientSecret: '8d5ccd28a2b698ddb1d0c738201cd0000edbee77',
-    repo: 'blogtalk',
-    owner: 'fxh803',
-    admin: ['fxh803'],
-    id: md5(location.pathname),
-    distractionFreeMode: true,
-    language: 'zh-CN',
-    enableHotKey: 'true'
-  })
-  gitalk.render('comments')
-  </script>
-      
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Hello World', 
+  owner: 'fxh803', // 可以是你的GitHub用户名，也可以是github id
+  repo: 'blogtalk',
+  oauth: {
+    client_id: 'e725cb4a126e7d40a387',
+    client_secret: '8d5ccd28a2b698ddb1d0c738201cd0000edbee77',
+  }
+})
+gitment.render('comments')
+</script>
+
+
 
 
 
