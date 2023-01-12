@@ -21,7 +21,7 @@
   <meta name="description" content="我是如何搭建我的博客的？跟随教程: csdn 评论设置？valine: valineleancloud: leancloud">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一篇博客">
-<meta property="og:url" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:url" content="https://fxh803.github.io/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="我是如何搭建我的博客的？跟随教程: csdn 评论设置？valine: valineleancloud: leancloud">
 <meta property="og:locale" content="zh_CN">
@@ -31,7 +31,7 @@
 <meta property="article:tag" content="博客搭建">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+  <link rel="canonical" href="https://fxh803.github.io/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -44,6 +44,8 @@
   
   
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
 <meta name="generator" content="Hexo 5.4.2"></head>
 
@@ -359,7 +361,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="第一篇博客" target="_blank" rel="external">https://fxhblog.com/2023/01/09/第一篇博客/</a>
+      <a href="https://fxh803.github.io/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="第一篇博客" target="_blank" rel="external">https://fxh803.github.io/2023/01/09/第一篇博客/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -392,7 +394,7 @@
     
   <section id="comments">
   	
-      <div id="vcomments"></div>
+           
     
   </section>
 
@@ -495,29 +497,24 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
   <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: 'w3h9uTMSSn7DfYUQ40KyFRlh-gzGzoHsz',
-    appKey: 'PEgjaPWlSzkNSwHuCP5G4nAL',
-    placeholder: '说点什么~',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: false
-  });
+  var gitalk = new Gitalk({
+    clientID: 'e725cb4a126e7d40a387',
+    clientSecret: 'c05ed299f46c14bf32feb882bc34ff1de79778a2',
+    repo: 'blogtalk',
+    owner: 'fxh803',
+    admin: ['fxh803'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true'
+  })
+  gitalk.render('comments')
   </script>
-
-     
+      
 
 
 
