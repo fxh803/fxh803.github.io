@@ -1,7 +1,7 @@
-https://fxhblog.com/about/index.html
 https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/
-https://fxhblog.com/repository/index.html
 https://fxhblog.com/2023/01/09/hello-world/
+https://fxhblog.com/about/index.html
+https://fxhblog.com/repository/index.html
 https://fxhblog.com/tags/index.html
 https://fxhblog.com/categories/index.html
 https://fxhblog.com/links/index.html
@@ -9,4 +9,4 @@ https://fxhblog.com/
 https://fxhblog.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/
 https://fxhblog.com/tags/hexo/
 https://fxhblog.com/tags/markdown%E6%A8%A1%E6%9D%BF/
-https://fxhblog.com/categories/%E5%AD%A6%E4%B9%A0/
+https://fxhblog.com/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/
