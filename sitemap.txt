@@ -7,4 +7,7 @@ https://fxhblog.com/links/index.html
 https://fxhblog.com/
 https://fxhblog.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/
 https://fxhblog.com/tags/hexo/
+https://fxhblog.com/tags/github-page/
+https://fxhblog.com/tags/git/
+https://fxhblog.com/tags/node-js/
 https://fxhblog.com/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/
