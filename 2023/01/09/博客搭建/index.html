@@ -21,28 +21,30 @@
   <meta name="description" content="跟随教程: csdn我是如何搭建我的博客的？github page通过 github page+hexo实现的个人博客搭建，github page可以托管我们的静态网页，适合博客这种比较简单无后端的网站，还有一个优点是免费。一开始我是打算通过阿里云实现一个服务，但是发现要收费，学生党没钱就此作罢。于是我把目光投向GitHub page，提供一个免费的服务器，也免去了自己搭建服务器和写数据库的麻烦。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一篇博客">
-<meta property="og:url" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:url" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="跟随教程: csdn我是如何搭建我的博客的？github page通过 github page+hexo实现的个人博客搭建，github page可以托管我们的静态网页，适合博客这种比较简单无后端的网站，还有一个优点是免费。一开始我是打算通过阿里云实现一个服务，但是发现要收费，学生党没钱就此作罢。于是我把目光投向GitHub page，提供一个免费的服务器，也免去了自己搭建服务器和写数据库的麻烦。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/helloworld.png">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/repo.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/ssh.png">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/addkey.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/connect.png">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/usessh.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/deployset.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/themeurl.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/dns.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/yumingconsole.jpg">
-<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/jiexi.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/helloworld.png">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/repo.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/ssh.png">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/addkey.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/connect.png">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/usessh.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/deployset.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/themeurl.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/dns.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/yumingconsole.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/jiexi.jpg">
 <meta property="article:published_time" content="2023-01-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-15T08:47:43.371Z">
+<meta property="article:modified_time" content="2023-01-15T10:26:07.060Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="博客搭建">
+<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/helloworld.png">
+<meta name="twitter:image" content="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/helloworld.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+  <link rel="canonical" href="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -260,7 +262,7 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="title">第一篇博客</a>
+                <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="title">第一篇博客</a>
               </p>
               <p class="item-date">
                 <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">2023-01-09</time>
@@ -275,7 +277,7 @@
                 <a class="category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a>
               </p>
               <p class="item-title">
-                <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="title">第一篇博客</a>
+                <a href="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="title">第一篇博客</a>
               </p>
               <p class="item-date">
                 <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">2023-01-09</time>
@@ -305,7 +307,7 @@
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-第一篇博客" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-博客搭建" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
@@ -320,12 +322,22 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="article-date">
+	<a href="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="article-date">
 	  <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">2023-01-09</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/hexo/" rel="tag">hexo</a>, <a class="article-tag-link-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a>
+  </span>
+
 
         
 	<span class="article-read hidden-xs">
@@ -336,7 +348,7 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/#comments" class="article-comment-link">评论</a></span>
         
 	
 		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.6k(字)</span>
@@ -372,9 +384,9 @@
 <p>然后我们可以继续输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g <span class="comment"># g即generate生成，生成静态文件</span></span><br><span class="line">hexo s <span class="comment"># s即server服务，打开本地调试服务</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop. <span class="comment"># 此时hexo在本地localhost:4000上运行</span></span><br></pre></td></tr></table></figure>
-<p>在浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a>，就可以看到hexo默认主题下的hello world 示例<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/helloworld.png"><br>到此，我们的博客在本地上已经可以运行，接下来我们要部署到github上</p>
+<p>在浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a>，就可以看到hexo默认主题下的hello world 示例<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/helloworld.png"><br>到此，我们的博客在本地上已经可以运行，接下来我们要部署到github上</p>
 <h4 id="5-github-pages准备工作"><a href="#5-github-pages准备工作" class="headerlink" title="5 github pages准备工作"></a>5 github pages准备工作</h4><p>首先注册<a target="_blank" rel="noopener" href="https://github.com/">github</a></p>
-<p>注册好之后，我们点击右上角的小头像，找到your repositories，点开后找到一个绿色的new按钮，新建一个GitHub库存，用来放我们的博客文件<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/repo.jpg"></p>
+<p>注册好之后，我们点击右上角的小头像，找到your repositories，点开后找到一个绿色的new按钮，新建一个GitHub库存，用来放我们的博客文件<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/repo.jpg"></p>
 <h4 id="6-配置SSH密钥"><a href="#6-配置SSH密钥" class="headerlink" title="6 配置SSH密钥"></a>6 配置SSH密钥</h4><p>SSH密钥?：Git使用https协议，每次pull, push都要输入密码，相当的烦。使用git协议，然后使用SSH密钥。这样可以省去每次都输密码。大多数 Git 服务器都会选择使用 SSH 公钥来进行授权。系统中的每个用户都必须提供一个公钥用于授权，没有的话就要生成一个。<br>配置好 SSH 密钥后，我们才可以通过 git 操作实现本地代码库与 Github 代码库同步</p>
 <p>在你的博客文件夹（hexo文件夹的上一级文件夹）git bash here输入以下命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span> <span class="comment"># 引号里面填写你的邮箱地址，比如我的是2210904816@qq.com</span></span><br></pre></td></tr></table></figure>
@@ -387,12 +399,12 @@
 <p>运行以下指令，把公钥复制到粘贴板上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clip &lt; ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 <h4 id="7-在github添加你的公钥"><a href="#7-在github添加你的公钥" class="headerlink" title="7 在github添加你的公钥"></a>7 在github添加你的公钥</h4><p>登录github，点击右上角头像，进入settings，找到左侧栏SSH and GPG keys</p>
-<p>new一个ssh keys<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/ssh.png"></p>
+<p>new一个ssh keys<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/ssh.png"></p>
 <p>然后添加，title随便写，key复制粘贴板上刚刚复制的密钥</p>
-<p><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/addkey.jpg"></p>
+<p><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/addkey.jpg"></p>
 <h4 id="8-测试ssh"><a href="#8-测试ssh" class="headerlink" title="8 测试ssh"></a>8 测试ssh</h4><p>在博客文件夹git bash here 复制以下指令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 原封不动地复制过去即可</span></span><br></pre></td></tr></table></figure>
-<p>然后如下显示：<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/connect.png"></p>
+<p>然后如下显示：<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/connect.png"></p>
 <p>马上填yes</p>
 <p>然后显示：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi xxx! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
@@ -402,15 +414,15 @@
 <p>到此为止 SSH Key 配置成功，本机已成功连接到 Github</p>
 <h4 id="10-将本地的-Hexo-文件更新到-Github-的库中"><a href="#10-将本地的-Hexo-文件更新到-Github-的库中" class="headerlink" title="10 将本地的 Hexo 文件更新到 Github 的库中"></a>10 将本地的 Hexo 文件更新到 Github 的库中</h4><p>登录 Github 打开自己的项目：用户名.github.io</p>
 <p>鼠标移到右上绿色的按钮，选择SSH</p>
-<p><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/usessh.jpg"></p>
+<p><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/usessh.jpg"></p>
 <p>点击复制，然后进入hexo文件夹里，右键用记事本（Notepad++或者VS code等都可以）打开该文件夹下的 _config.yml 文件</p>
-<p>按如下修改：(冒号后面有个空格)<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/deployset.jpg"></p>
+<p>按如下修改：(冒号后面有个空格)<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/deployset.jpg"></p>
 <p>然后在hexo文件夹输入以下指令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save <span class="comment"># 安装hexo部署到GitHub的包</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#generate生成文件</span></span><br><span class="line">hexo d  <span class="comment">#deploy部署文件到远程</span></span><br><span class="line"><span class="comment"># 或者 hexo g -d</span></span><br></pre></td></tr></table></figure>
 <p>然后就部署完成了<br>你的博客地址：https://你的用户名.github.io，现在每个人都可以通过此链接访问你的博客了</p>
-<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官方主题</a>网站有很多主题可供我们选择，这里以我自己的主题为例<br>点击这些主题页面，通常我们都可以找到主题作者的github，然后在他们的仓库里找到我们想要的那个主题仓库(通常命名为hexo-theme-xxx)，复制网址<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/themeurl.jpg"></p>
+<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官方主题</a>网站有很多主题可供我们选择，这里以我自己的主题为例<br>点击这些主题页面，通常我们都可以找到主题作者的github，然后在他们的仓库里找到我们想要的那个主题仓库(通常命名为hexo-theme-xxx)，复制网址<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/themeurl.jpg"></p>
 <p>然后打开我们hexo文件夹下的themes文件夹，右键git bash here，输入指令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://...  <span class="comment"># 我们刚刚复制的主题网址 </span></span><br></pre></td></tr></table></figure>
 
@@ -431,9 +443,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line"><span class="comment"># hexo g -d</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h3><p>xxx.github.io这个域名真的太捞了，马上去阿里云搞个域名</p>
-<p>注册登录阿里云，找到他们的热门产品域名注册-&gt;查询自己想要的域名-&gt;加入清单-&gt;支付-&gt;填写个人信息模板-&gt;完成<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/dns.jpg"></p>
-<p>然后回到首页，点击右上角控制台-&gt;我的导航找到最近使用点击域名-&gt;点击左侧域名列表-&gt;点击我们要的域名列点击解析<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/yumingconsole.jpg"></p>
-<p>点击添加记录，需要添加两个记录，两个记录类型都是 CNAME ，第一个主机记录为 @ ，第二个主机记录为 www，记录值都是填你自己的博客地址（比如我的是：fxh803.github.io），保存之后域名解析就完成了！（主机记录有 @ 和 www 能保证URL加不加 www 都能访问）<br><img src="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/jiexi.jpg"></p>
+<p>注册登录阿里云，找到他们的热门产品域名注册-&gt;查询自己想要的域名-&gt;加入清单-&gt;支付-&gt;填写个人信息模板-&gt;完成<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/dns.jpg"></p>
+<p>然后回到首页，点击右上角控制台-&gt;我的导航找到最近使用点击域名-&gt;点击左侧域名列表-&gt;点击我们要的域名列点击解析<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/yumingconsole.jpg"></p>
+<p>点击添加记录，需要添加两个记录，两个记录类型都是 CNAME ，第一个主机记录为 @ ，第二个主机记录为 www，记录值都是填你自己的博客地址（比如我的是：fxh803.github.io），保存之后域名解析就完成了！（主机记录有 @ 和 www 能保证URL加不加 www 都能访问）<br><img src="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/jiexi.jpg"></p>
 <p>为了使 GitHub 接收我们的域名，还需要在博客的根目录下添加一个名为 CNAME 的文件（注意不要加.txt，没有任何后缀名！），这个文件放到 Hexo 文件夹的 source 里面，文件里面填写你的域名（加不加www都行），比如要填写我的域名，文件里面就写：<a target="_blank" rel="noopener" href="http://www.fxhblog.com/">www.fxhblog.com</a> 或者 fxhblog.com，经过以上操作，别人就可以通过 <a target="_blank" rel="noopener" href="http://www.fxhblog.com/">www.fxhblog.com</a> 、fxhblog.com、fxh803.github.io 三个当中任意一个访问博客了<br>这里我一开始填 <a target="_blank" rel="noopener" href="http://www.fxhblog.com/">www.fxhblog.com</a> 会访问不了出bug，建议还是填xxx.com，简短点也好</p>
 
       
@@ -444,7 +456,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://fxhblog.com/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="第一篇博客" target="_blank" rel="external">https://fxhblog.com/2023/01/09/第一篇博客/</a>
+      <a href="https://fxhblog.com/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="第一篇博客" target="_blank" rel="external">https://fxhblog.com/2023/01/09/博客搭建/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -490,10 +502,10 @@
   
   <ul class="pager pull-left">
     
-    
-    <li class="next">
-      <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="第一篇博客"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    <li class="prev">
+      <a href="/2023/01/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E2%80%94%E2%80%94%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="第一篇博客"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
+    
     
     
     <li class="toggle-toc">
