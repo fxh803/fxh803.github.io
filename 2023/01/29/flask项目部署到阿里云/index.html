@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>flask项目部署到阿里云 | fxh的博客</title>
+  <meta name="description" content="前言上一年在学校做好了一个前后端打通的web应用，但是只是在本地上运行，没有部署到服务器。之前也没有接触过相关知识，于是跟着教程尝试部署了一下。 购买服务器这里就略过，我选择的是阿里云云服务器ECS上Ubuntu16 64位的系统。购买完之后会有一个实例，就是我们购买好的服务器，然后第一步我们就要重置实例密码（ssh链接密码），作为接下来我们连接服务器的密码。 添加安全组添加5000端口，添加80">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask项目部署到阿里云">
+<meta property="og:url" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/index.html">
+<meta property="og:site_name" content="fxh的博客">
+<meta property="og:description" content="前言上一年在学校做好了一个前后端打通的web应用，但是只是在本地上运行，没有部署到服务器。之前也没有接触过相关知识，于是跟着教程尝试部署了一下。 购买服务器这里就略过，我选择的是阿里云云服务器ECS上Ubuntu16 64位的系统。购买完之后会有一个实例，就是我们购买好的服务器，然后第一步我们就要重置实例密码（ssh链接密码），作为接下来我们连接服务器的密码。 添加安全组添加5000端口，添加80">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/1.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/2.jpg">
+<meta property="og:image" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/3.png">
+<meta property="og:image" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/4.jpg">
+<meta property="article:published_time" content="2023-01-29T09:18:04.000Z">
+<meta property="article:modified_time" content="2023-12-03T10:07:55.782Z">
+<meta property="article:author" content="fxh">
+<meta property="article:tag" content="flask">
+<meta property="article:tag" content="mongodb">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/1.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="fxh的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/code.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/fxh803" target="_blank">
+          <img class="img-circle img-rotate" src="/images/bat.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">fxh</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">programmer &amp; INTP</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 广东 深圳</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/fxh803" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>一个收集/整理/分享资料的个人博客</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/" rel="tag">flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-page/" rel="tag">github page</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-native/" rel="tag">react-native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/android/" style="font-size: 13px;">android</a> <a href="/tags/flask/" style="font-size: 13px;">flask</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/github-page/" style="font-size: 13px;">github page</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/node-js/" style="font-size: 13px;">node.js</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/react-native/" style="font-size: 13px;">react-native</a> <a href="/tags/ubuntu/" style="font-size: 13px;">ubuntu</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 13px;">博客搭建</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/unity/">unity</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" class="title">unity的URP渲染管线</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-05T16:00:00.000Z" itemprop="datePublished">2023-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/03/%E8%B0%B7%E6%AD%8COWL-ViT%E6%A8%A1%E5%9E%8B/" class="title">谷歌OWL-ViT模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-02T16:00:00.000Z" itemprop="datePublished">2023-12-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/06/%E5%9F%BA%E4%BA%8Ereact-native%E6%A1%86%E6%9E%B6%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" class="title">基于react-native框架的移动端开发</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-05T16:00:00.000Z" itemprop="datePublished">2023-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" class="title">flask项目部署到阿里云</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-29T09:18:04.000Z" itemprop="datePublished">2023-01-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="title">博客搭建</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-08T16:00:00.000Z" itemprop="datePublished">2023-01-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AD%E4%B9%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">购买服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%AE%89%E5%85%A8%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">添加安全组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh%E9%93%BE%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">ssh链接服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0apt%E6%BA%90"><span class="toc-number">5.</span> <span class="toc-text">更新apt源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85mongodb"><span class="toc-number">6.</span> <span class="toc-text">安装mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">6.1.</span> <span class="toc-text">1、安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE"><span class="toc-number">6.2.</span> <span class="toc-text">2、配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">6.3.</span> <span class="toc-text">3、设置用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%90%AF%E7%94%A8%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="toc-number">6.4.</span> <span class="toc-text">4、启用用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-number">6.5.</span> <span class="toc-text">5、测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">7.</span> <span class="toc-text">虚拟环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">7.1.</span> <span class="toc-text">1、安装虚拟环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">7.2.</span> <span class="toc-text">2、创建虚拟环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%BF%9B%E5%85%A5%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">7.3.</span> <span class="toc-text">3、进入虚拟环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENginx"><span class="toc-number">8.</span> <span class="toc-text">安装配置Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-1"><span class="toc-number">8.1.</span> <span class="toc-text">1、安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-1"><span class="toc-number">8.2.</span> <span class="toc-text">2、配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-number">8.3.</span> <span class="toc-text">3、测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85gunicorn"><span class="toc-number">9.</span> <span class="toc-text">安装gunicorn</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0"><span class="toc-number">10.</span> <span class="toc-text">项目上传</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AF%BC%E5%87%BA%E7%8E%AF%E5%A2%83"><span class="toc-number">10.1.</span> <span class="toc-text">1、导出环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E8%87%B3github"><span class="toc-number">10.2.</span> <span class="toc-text">2、项目上传至github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%89%E5%8F%96GitHub%E9%A1%B9%E7%9B%AE"><span class="toc-number">10.3.</span> <span class="toc-text">3、服务器拉取GitHub项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80pip%E5%8C%85"><span class="toc-number">10.4.</span> <span class="toc-text">4、安装所需pip包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C"><span class="toc-number">11.</span> <span class="toc-text">项目运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%B3%E6%AD%A4%E6%88%91%E4%BB%AC%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%B0%B1%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BA%86%EF%BC%81"><span class="toc-number">11.0.1.</span> <span class="toc-text">至此我们的项目就跑起来了！</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-flask项目部署到阿里云" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flask项目部署到阿里云
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" class="article-date">
+	  <time datetime="2023-01-29T09:18:04.000Z" itemprop="datePublished">2023-01-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/flask/" rel="tag">flask</a>, <a class="article-tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="article-tag-link-link" href="/tags/mongodb/" rel="tag">mongodb</a>, <a class="article-tag-link-link" href="/tags/nginx/" rel="tag">nginx</a>, <a class="article-tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="article-tag-link-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.9k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一年在学校做好了一个前后端打通的web应用，但是只是在本地上运行，没有部署到服务器。之前也没有接触过相关知识，于是跟着<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40423339/article/details/86606308?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167400753316800182743386%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167400753316800182743386&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-5-86606308-null-null.142%5Ev71%5Econtrol_1,201%5Ev4%5Eadd_ask&utm_term=%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2flask&spm=1018.2226.3001.4449">教程</a>尝试部署了一下。</p>
+<h1 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h1><p>这里就略过，我选择的是阿里云云服务器ECS上Ubuntu16 64位的系统。购买完之后会有一个实例，就是我们购买好的服务器，然后第一步我们就要重置实例密码（ssh链接密码），作为接下来我们连接服务器的密码。<br><img src="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/1.jpg"></p>
+<h1 id="添加安全组"><a href="#添加安全组" class="headerlink" title="添加安全组"></a>添加安全组</h1><p>添加5000端口，添加80端口，5000是我们flask的端口，80是nginx的端口，所以都要设置好。如图：<br><img src="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/2.jpg"></p>
+<h1 id="ssh链接服务器"><a href="#ssh链接服务器" class="headerlink" title="ssh链接服务器"></a>ssh链接服务器</h1><p>打开我们的cmd/powershell，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xx.xx.xx.xx <span class="comment">#如：ssh root@23.187.187.12（你刚刚买的服务器的公网ip）</span></span><br></pre></td></tr></table></figure>
+<p>然后输入我们刚刚更改的实例密码，就进入到了我们的服务器。输入密码的时候不会显示字符。</p>
+<h1 id="更新apt源"><a href="#更新apt源" class="headerlink" title="更新apt源"></a>更新apt源</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update <span class="comment">#把源更新一下，保证我们用的包都是最新可兼容的</span></span><br></pre></td></tr></table></figure>
+<h1 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h1><h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mongodb <span class="comment"># apt-get 安装 mongodb</span></span><br></pre></td></tr></table></figure>
+<p>安装好后我们验证一下，如果安装不成功，就百度一下报错，大多可能是版本问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认下载完后自动启动，可以用以下命令进行验证</span></span><br><span class="line">service mongodb status <span class="comment"># 查看mongodb的启动状态</span></span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">mongo <span class="comment">#进入mongodb数据库验证</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h2><p>验证好之后，我们要对mongodb进行配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改配置</span></span><br><span class="line">vim /etc/mongodb.conf</span><br></pre></td></tr></table></figure>
+<p>vim命令可以进入到服务器的文件进行修改，这里有几个常用的vim操作</p>
+<pre><code>进入编辑模式：在键盘上按下字母i或者a
+退出编辑模式：
+    方式一：按下esc键，输入“:wq”3个英文字符，然后按下Enter键，表示保存文件并退出。
+    方式二：按下esc键，输入“:q”两个英文字符，然后按下Enter键，表示不保存并退出。（如果本次编辑没有修改内容，则可以顺利退出；否则，vim编辑器是不会允许你退出的，这时如果想要不保存退出，就要使用下面的方法三）
+    方式三：按下esc键，输入“:q!”3个英文字符，然后按Enter键，表示不保存并强制退出。
+</code></pre>
+<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52671517/article/details/124673951">vim操作</a></p>
+<p>于是我们进入到文件之后按下a/i，把文件中的配置信息改成如下（注意有的配置项已存在，直接更改不要全部复制粘贴）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line"><span class="comment">#dbpath=/home/ctr_temp/data_base_temp/mongodb/data</span></span><br><span class="line">dbpath=/var/lib/mongodb</span><br><span class="line"></span><br><span class="line"><span class="comment">#where to log</span></span><br><span class="line"><span class="comment">#logpath=/home/ctr_temp/data_base_temp/mongodb/log/mongodb.log</span></span><br><span class="line">logpath=/var/log/mongodb/mongodb.log</span><br><span class="line"></span><br><span class="line">logappend=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bind_ip = 127.0.0.1</span></span><br><span class="line">bind_ip = 0.0.0.0 <span class="comment">#允许外网访问</span></span><br><span class="line"></span><br><span class="line">port = 27017</span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable journaling, http://www.mongodb.org/display/DOCS/Journaling</span></span><br><span class="line">journal=<span class="literal">true</span></span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41953485/article/details/126555621?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167401012116800217097023%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167401012116800217097023&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-3-126555621-null-null.142%5Ev71%5Econtrol_1,201%5Ev4%5Eadd_ask&utm_term=ubuntu%E9%83%A8%E7%BD%B2mongodb&spm=1018.2226.3001.4187">mongo配置</a></p>
+<p>然后稍微重启一下mongodb</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mongodb stop <span class="comment">#stop</span></span><br><span class="line">service mongodb start <span class="comment">#start</span></span><br><span class="line">service mongodb status <span class="comment"># 查看mongodb的启动状态</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、设置用户信息"><a href="#3、设置用户信息" class="headerlink" title="3、设置用户信息"></a>3、设置用户信息</h2><p>这一步其实可以不做数据库就已经可以使用，但不做的话MongoDB只允许本地连接，同时不需要使用任何账号密码就可以直接连接MongoDB。所以还是要稍微配置一下。</p>
+<p>首先进入数据库，首次没有配置安全认证的情况下进入无需使用用户名以及密码验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line">&gt; show dbs <span class="comment"># 查看当前已有的数据库</span></span><br><span class="line">admin   0.000GB</span><br><span class="line">config  0.000GB</span><br><span class="line"><span class="built_in">local</span>   0.000GB</span><br></pre></td></tr></table></figure>
+<p>创建管理员用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin <span class="comment">#进入admin这个库</span></span><br><span class="line">switched to db admin</span><br><span class="line">&gt; db.createUser(&#123;user:<span class="string">&quot;xxx_xxxx&quot;</span>,<span class="built_in">pwd</span>:<span class="string">&quot;xxxxxxxx&quot;</span>,roles:[&#123;role:<span class="string">&quot;root&quot;</span>, db:<span class="string">&quot;admin&quot;</span>&#125;]&#125;) <span class="comment">#user和password可以自定义</span></span><br><span class="line">Successfully added user...</span><br></pre></td></tr></table></figure>
+<p>这个管理员是可以掌控整个mongodb的，暂时我们先创建这一个root管理员。有需要的话我们还可以创建多个用户，以实现不同的权限功能，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">&gt; db.createUser(&#123;user:<span class="string">&quot;xxx_xxxx&quot;</span>,<span class="built_in">pwd</span>:<span class="string">&quot;xxxxxxxx&quot;</span>,roles: [&#123;role:<span class="string">&quot;userAdminAnyDatabase&quot;</span>, db: <span class="string">&quot;admin&quot;</span>&#125;]&#125;)<span class="comment">#授予在所有数据库上管理User的权限</span></span><br><span class="line"></span><br><span class="line">&gt; use test_db <span class="comment">#新建一个数据库</span></span><br><span class="line">&gt; db.createUser(&#123;user:<span class="string">&quot;db_owner&quot;</span>, <span class="built_in">pwd</span>:<span class="string">&quot;xxxxxxxx&quot;</span>, roles:[&#123;role:<span class="string">&quot;dbOwner&quot;</span>, db:<span class="string">&quot;test_db&quot;</span>&#125;]&#125;)<span class="comment">#在当前DB中执行任意操作</span></span><br><span class="line">&gt; db.createUser(&#123;user:<span class="string">&quot;db_user&quot;</span>, <span class="built_in">pwd</span>:<span class="string">&quot;xxxxxxxx&quot;</span>, roles:[&#123;role:<span class="string">&quot;readWrite&quot;</span>, db:<span class="string">&quot;test_db&quot;</span>&#125;]&#125;)<span class="comment">#授予User读写数据的权限</span></span><br></pre></td></tr></table></figure>
+<p>具体mongodb可以创建的用户类型（role）大概有这几种：</p>
+<pre><code>数据库用户角色（Database User Roles）
+　　　　read：授予User只读数据的权限
+　　　　readWrite：授予User读写数据的权限
+
+数据库管理角色（Database Administration Roles）：
+　　　　dbAdmin：在当前dB中执行管理操作
+　　　　dbOwner：在当前DB中执行任意操作
+　　　　userAdmin：在当前DB中管理User
+
+备份和还原角色（Backup and Restoration Roles）：
+　　　　backup
+　　　　restore
+
+跨库角色（All-Database Roles）：
+　　　　readAnyDatabase：授予在所有数据库上读取数据的权限
+　　　　readWriteAnyDatabase：授予在所有数据库上读写数据的权限
+　　　　userAdminAnyDatabase：授予在所有数据库上管理User的权限
+　　　　dbAdminAnyDatabase：授予管理所有数据库的权限
+
+集群管理角色（Cluster Administration Roles）：
+　　　　clusterAdmin：授予管理集群的最高权限
+　　　　clusterManager：授予管理和监控集群的权限，A user with this role can access the config and local databases, which are used in sharding and replication, respectively.
+　　　　clusterMonitor：授予监控集群的权限，对监控工具具有readonly的权限
+　　　　hostManager：管理Server
+</code></pre>
+<p>创建完后我们可以验证一下是否创建成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">switched to db admin</span><br><span class="line">&gt; show <span class="built_in">users</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_id&quot;</span> : <span class="string">&quot;admin.xxx_xxxx&quot;</span>,</span><br><span class="line">	<span class="string">&quot;userId&quot;</span> : UUID(<span class="string">&quot;xxxxxxxxxxxxxxxxxxxx&quot;</span>),</span><br><span class="line">	<span class="string">&quot;user&quot;</span> : <span class="string">&quot;xxx_xxxx&quot;</span>,</span><br><span class="line">	<span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">	<span class="string">&quot;roles&quot;</span> : [</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">&quot;role&quot;</span> : <span class="string">&quot;root&quot;</span>,</span><br><span class="line">			<span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span></span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4、启用用户认证"><a href="#4、启用用户认证" class="headerlink" title="4、启用用户认证"></a>4、启用用户认证</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongodb.conf <span class="comment">#进入文件进行配置</span></span><br></pre></td></tr></table></figure>
+<p>将auth项的值置为true</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line"><span class="comment"># Enables periodic logging of CPU utilization and I/O wait</span></span><br><span class="line"><span class="comment">#cpu = true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn on/off security.  Off is currently the default</span></span><br><span class="line"><span class="comment">#noauth = true</span></span><br><span class="line">auth = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Verbose logging output.</span></span><br><span class="line"><span class="comment">#verbose = true</span></span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+<p>重启一下数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">exit</span> <span class="comment">#退出mongo</span></span><br><span class="line"><span class="built_in">bye</span></span><br><span class="line">service mongodb restart <span class="comment">#重启</span></span><br></pre></td></tr></table></figure>
+<h2 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h2><p>我们直接不用账户登录，会显示没有权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line">&gt; show dbs</span><br><span class="line">2022-08-27T14:50:30.755+0800 E QUERY    [thread1] Error: listDatabases failed:&#123;</span><br><span class="line">	<span class="string">&quot;ok&quot;</span> : 0,</span><br><span class="line">	<span class="string">&quot;errmsg&quot;</span> : <span class="string">&quot;there are no users authenticated&quot;</span>,</span><br><span class="line">	<span class="string">&quot;code&quot;</span> : 13,</span><br><span class="line">	<span class="string">&quot;codeName&quot;</span> : <span class="string">&quot;Unauthorized&quot;</span></span><br><span class="line">&#125; :</span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+<p>用我们的管理员账户登录试试看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo -u xxxxxx -p xxxxxxxx --authenticationDatabase admin <span class="comment"># xxxx为你的用户名和密码</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mongo -u xxx_xxxx -p xxxxxxxx --authenticationDatabase admin </span><br><span class="line">MongoDB shell version v3.6.8</span><br><span class="line">connecting to: mongodb://127.0.0.1:27017</span><br><span class="line">Implicit session: session &#123; <span class="string">&quot;id&quot;</span> : UUID(<span class="string">&quot;xxxxxxxxxxxxxxxxxxxxx&quot;</span>) &#125;</span><br><span class="line">MongoDB server version: 3.6.8</span><br><span class="line">Server has startup warnings:</span><br><span class="line">... ...</span><br><span class="line">&gt; show dbs <span class="comment">#查看系统各个数据库情况</span></span><br><span class="line">admin   0.000GB</span><br><span class="line">config  0.000GB</span><br><span class="line"><span class="built_in">local</span>   0.000GB</span><br><span class="line"><span class="comment"># 如果没有向一个数据库填入任何信息的话，默认不显示</span></span><br><span class="line">&gt; use admin <span class="comment">#查看一个库</span></span><br><span class="line">switched to db admin</span><br><span class="line">&gt; show <span class="built_in">users</span> <span class="comment">#查看用户</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;_id&quot;</span> : <span class="string">&quot;admin.xxx_xxxx&quot;</span>,</span><br><span class="line">	<span class="string">&quot;userId&quot;</span> : UUID(<span class="string">&quot;xxxxxxxxxxxxxxxxx&quot;</span>),</span><br><span class="line">	<span class="string">&quot;user&quot;</span> : <span class="string">&quot;xxx_xxxx&quot;</span>,</span><br><span class="line">	<span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">	<span class="string">&quot;roles&quot;</span> : [</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">&quot;role&quot;</span> : <span class="string">&quot;root&quot;</span>,</span><br><span class="line">			<span class="string">&quot;db&quot;</span> : <span class="string">&quot;admin&quot;</span></span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此mongo数据库就搞定了</p>
+<h1 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h1><h2 id="1、安装虚拟环境"><a href="#1、安装虚拟环境" class="headerlink" title="1、安装虚拟环境"></a>1、安装虚拟环境</h2><p>在~/目录下（链接到服务器的最开始目录）创建.virtualenvs文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> .virtualenvs</span><br></pre></td></tr></table></figure>
+<p>下载pip包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br><span class="line">pip install virtualenvwrapper</span><br></pre></td></tr></table></figure>
+<p>配置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>将如下代码添加到文件的最后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定虚拟环境目录</span></span><br><span class="line"><span class="built_in">export</span> WORKON_HOME=<span class="variable">$HOME</span>/.virtualenvs</span><br><span class="line"><span class="comment"># 指定python版本</span></span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line"><span class="comment"># 指定virtualenv的路径</span></span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv</span><br><span class="line"><span class="built_in">source</span> /usr/local/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>
+<p>激活设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<h2 id="2、创建虚拟环境"><a href="#2、创建虚拟环境" class="headerlink" title="2、创建虚拟环境"></a>2、创建虚拟环境</h2><p>我们每一个项目最好都有一个独立的虚拟环境，以保证我们的整个系统不会因为杂乱的各种环境设置搞得乱七八糟</p>
+<p>在python3中，创建虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv -p python3 虚拟环境名称 <span class="comment">#如：mkvirtualenv -p python3 venv（一个叫venv的虚拟环境）</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、进入虚拟环境"><a href="#3、进入虚拟环境" class="headerlink" title="3、进入虚拟环境"></a>3、进入虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workon 对应虚拟环境名 <span class="comment">#workon venv</span></span><br></pre></td></tr></table></figure>
+<p>如果不知道虚拟环境名，可以输完workon 点击两下tab键既可以提示你的虚拟环境名</p>
+<h1 id="安装配置Nginx"><a href="#安装配置Nginx" class="headerlink" title="安装配置Nginx"></a>安装配置Nginx</h1><h2 id="1、安装-1"><a href="#1、安装-1" class="headerlink" title="1、安装"></a>1、安装</h2><p>在我们刚刚建好的虚拟环境下安装nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>我们要知道的nginx的启动停止指令(先别输入)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx start <span class="comment">#启动</span></span><br><span class="line">/etc/init.d/nginx stop  <span class="comment">#停止</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、配置-1"><a href="#2、配置-1" class="headerlink" title="2、配置"></a>2、配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<p>进入上述文件后改成如下配置(不要直接复制，有一些配置项只是注释了，我们要看好每一项进行配置)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是多台服务器的话，则在此配置，并修改 location 节点下面的 proxy_pass </span></span><br><span class="line">upstream flask &#123;</span><br><span class="line">        server 127.0.0.1:5000;</span><br><span class="line">        server 127.0.0.1:5001;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">        <span class="comment"># 监听80端口</span></span><br><span class="line">        listen 80 default_server;</span><br><span class="line">        listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">        root /var/www/html;</span><br><span class="line"></span><br><span class="line">        index index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">        server_name _;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                <span class="comment"># 请求转发到gunicorn服务器</span></span><br><span class="line">                proxy_pass http://127.0.0.1:5000;</span><br><span class="line">                <span class="comment"># 请求转发到多个gunicorn服务器</span></span><br><span class="line">                <span class="comment"># proxy_pass http://flask;</span></span><br><span class="line">                <span class="comment"># 设置请求头，并将头信息传递给服务器端 </span></span><br><span class="line">                proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">                <span class="comment"># 设置请求头，传递原始请求ip给 gunicorn 服务器</span></span><br><span class="line">                proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx start <span class="comment">#启动nginx</span></span><br></pre></td></tr></table></figure>
+<p>打开浏览器，网址栏输入你的公网地址，可以看到以下界面，或者是一个 welcome to nginx 的界面<br><img src="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/3.png"></p>
+<h1 id="安装gunicorn"><a href="#安装gunicorn" class="headerlink" title="安装gunicorn"></a>安装gunicorn</h1><p>在虚拟环境下安装gunicorn</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install gunicorn</span><br></pre></td></tr></table></figure>
+<p>还没安装flask的也要安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip list <span class="comment">#查询已安装的包</span></span><br><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
+<p>测试一下，新建一个py文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim test.py <span class="comment">#新建</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件内容</span></span><br><span class="line">from flask import Flask </span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">def index():</span><br><span class="line">	<span class="built_in">return</span> <span class="string">&quot;只因你太美&quot;</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">	app.run()</span><br></pre></td></tr></table></figure>
+
+<p>运行test.py文件，在文件所在目录下运行一下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#gunicorn 语法格式如下</span></span><br><span class="line"><span class="comment"># -w: 表示进程（worker） -b：表示绑定ip地址和端口号（bind）</span></span><br><span class="line"><span class="comment">#gunicorn -w 2 -b 127.0.0.1:5000 运行文件名称:Flask程序实例名</span></span><br><span class="line"></span><br><span class="line">gunicorn -w 2 -b 127.0.0.1:5000 <span class="built_in">test</span>:app</span><br></pre></td></tr></table></figure>
+<p>打开浏览器，刷新网页，就可以看到我们期待已久的鸡哥了</p>
+<h1 id="项目上传"><a href="#项目上传" class="headerlink" title="项目上传"></a>项目上传</h1><h2 id="1、导出环境"><a href="#1、导出环境" class="headerlink" title="1、导出环境"></a>1、导出环境</h2><p>把在本地用到的包导出到一个requirements.txt的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+<p>导出之后放在项目文件夹中等会一起上传到服务器</p>
+<h2 id="2、项目上传至github"><a href="#2、项目上传至github" class="headerlink" title="2、项目上传至github"></a>2、项目上传至github</h2><p>本人是将项目上传到github再转到服务器上，然后我们要用到<a target="_blank" rel="noopener" href="https://git-scm.com/">git</a>这个代码管理工具，所以要先下载git，再在GitHub上创建一个仓库，然后通过git把项目上传到GitHub仓库再转存到服务器上。</p>
+<p>上传到github可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40770527/article/details/124129505?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167328755616782429745456%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167328755616782429745456&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-1-124129505-null-null.142%5Ev70%5Eone_line,201%5Ev4%5Eadd_ask&utm_term=github%E4%B8%8A%E4%BC%A0%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE&spm=1018.2226.3001.4187">这篇文章</a></p>
+<h2 id="3、服务器拉取GitHub项目"><a href="#3、服务器拉取GitHub项目" class="headerlink" title="3、服务器拉取GitHub项目"></a>3、服务器拉取GitHub项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git <span class="comment">#安装git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/xxxxx/xxxxx.git <span class="comment">#把项目复制到服务器</span></span><br></pre></td></tr></table></figure>
+<h2 id="4、安装所需pip包"><a href="#4、安装所需pip包" class="headerlink" title="4、安装所需pip包"></a>4、安装所需pip包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 你的仓库名 <span class="comment">#进入项目文件夹</span></span><br><span class="line">pip install -r requirements.txt <span class="comment">#安装pip包</span></span><br></pre></td></tr></table></figure>
+<h1 id="项目运行"><a href="#项目运行" class="headerlink" title="项目运行"></a>项目运行</h1><p>项目运行前要确保项目已经更改为生产下的代码，而非本地调试开发运行的代码。如前端请求函数的ip地址端口要设置好为服务器的ip地址，连接mongodb时要加上数据库用户名和密码获得权限等，具体问题不会就度娘==</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动应用</span></span><br><span class="line">gunicorn -w 2 -b 0.0.0.0:5000 xxx:app <span class="comment">#0.0.0.0监听发送到本服务器的请求</span></span><br><span class="line">gunicorn -w 2 -b 0.0.0.0:5000 xxx:app -D <span class="comment">#后台运行，关闭链接服务器将继续运行flask应用</span></span><br></pre></td></tr></table></figure>
+<p>如果要结束运行，则杀死flask进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -tulpn <span class="comment">#查看系统网络进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 xxxxx <span class="comment">#杀死xxxx号进程</span></span><br></pre></td></tr></table></figure>
+<h3 id="至此我们的项目就跑起来了！"><a href="#至此我们的项目就跑起来了！" class="headerlink" title="至此我们的项目就跑起来了！"></a>至此我们的项目就跑起来了！</h3><p><img src="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/4.jpg"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://fxhblog.com/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" title="flask项目部署到阿里云" target="_blank" rel="external">https://fxhblog.com/2023/01/29/flask项目部署到阿里云/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/fxh803" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/bat.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/fxh803" target="_blank"><span class="text-dark">fxh</span><small class="ml-1x">programmer &amp; INTP</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/09/06/%E5%9F%BA%E4%BA%8Ereact-native%E6%A1%86%E6%9E%B6%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="基于react-native框架的移动端开发"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/01/09/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="博客搭建"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/fxh803" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    appId: 'w3h9uTMSSn7DfYUQ40KyFRlh-gzGzoHsz',
+    appKey: 'PEgjaPWlSzkNSwHuCP5G4nAL',
+    placeholder: '说点什么~(昵称输入QQ号自动获取QQ头像&amp;ID)',
+    avatar: '',
+    meta: meta,
+    pageSize: '10' || 10,
+    enableQQ: 'true'
+    
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
