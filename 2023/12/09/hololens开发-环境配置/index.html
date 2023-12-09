@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>hololens开发-环境配置 | fxh的博客</title>
+  <meta name="description" content="简介hololens是一款微软研发的混合现实(MR)眼镜。要在眼镜上开发自己的应用，就必须用到unity，visual studio以及相关库MRTK（mixed reality toolkit）。 安装unityunity的安装主要就是通过unity hub 安装编辑器，最好选择（LTS）版本。然后模块安装上UWP和windows build support，如下图。 visual studio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hololens开发-环境配置">
+<meta property="og:url" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="fxh的博客">
+<meta property="og:description" content="简介hololens是一款微软研发的混合现实(MR)眼镜。要在眼镜上开发自己的应用，就必须用到unity，visual studio以及相关库MRTK（mixed reality toolkit）。 安装unityunity的安装主要就是通过unity hub 安装编辑器，最好选择（LTS）版本。然后模块安装上UWP和windows build support，如下图。 visual studio">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/2.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/3.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/4.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/5.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/6.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/7.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/9.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/openxr.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/8.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/10.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/11.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/12.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/13.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/14.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/15.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/16.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/17.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/18.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/19.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/21.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/22.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/23.png">
+<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/24.png">
+<meta property="article:published_time" content="2023-12-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-09T08:18:22.081Z">
+<meta property="article:author" content="fxh">
+<meta property="article:tag" content="unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="fxh的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/code.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/fxh803" target="_blank">
+          <img class="img-circle img-rotate" src="/images/bat.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">fxh</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">programmer &amp; INTP</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 广东 深圳</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/fxh803" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>一个收集/整理/分享资料的个人博客</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/unity/">unity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/" rel="tag">flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-page/" rel="tag">github page</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-native/" rel="tag">react-native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unity/" rel="tag">unity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/android/" style="font-size: 13px;">android</a> <a href="/tags/flask/" style="font-size: 13px;">flask</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/github-page/" style="font-size: 13px;">github page</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/nginx/" style="font-size: 13px;">nginx</a> <a href="/tags/node-js/" style="font-size: 13px;">node.js</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/react-native/" style="font-size: 13px;">react-native</a> <a href="/tags/ubuntu/" style="font-size: 13px;">ubuntu</a> <a href="/tags/unity/" style="font-size: 14px;">unity</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 13px;">博客搭建</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/unity/">unity</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="title">hololens开发-环境配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-08T16:00:00.000Z" itemprop="datePublished">2023-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/unity/">unity</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" class="title">unity的URP渲染管线</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-05T16:00:00.000Z" itemprop="datePublished">2023-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/03/%E8%B0%B7%E6%AD%8COWL-ViT%E6%A8%A1%E5%9E%8B/" class="title">谷歌OWL-ViT模型</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-02T16:00:00.000Z" itemprop="datePublished">2023-12-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/06/%E5%9F%BA%E4%BA%8Ereact-native%E6%A1%86%E6%9E%B6%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" class="title">基于react-native框架的移动端开发</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-05T16:00:00.000Z" itemprop="datePublished">2023-09-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/29/flask%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91/" class="title">flask项目部署到阿里云</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-29T09:18:04.000Z" itemprop="datePublished">2023-01-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#unity"><span class="toc-number">2.1.</span> <span class="toc-text">unity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#visual-studio"><span class="toc-number">2.2.</span> <span class="toc-text">visual studio</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">配置环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%B9%B3%E5%8F%B0"><span class="toc-number">3.1.</span> <span class="toc-text">切换平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5-OpenXR"><span class="toc-number">3.2.</span> <span class="toc-text">导入 OpenXR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5MRTK%E5%8C%85"><span class="toc-number">3.3.</span> <span class="toc-text">导入MRTK包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87GitHub%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.3.1.</span> <span class="toc-text">通过GitHub下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MixedRealityFeatureTool%E4%B8%8B%E8%BD%BD%E5%AF%BC%E5%85%A5"><span class="toc-number">3.3.2.</span> <span class="toc-text">MixedRealityFeatureTool下载导入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEMRTK"><span class="toc-number">3.4.</span> <span class="toc-text">配置MRTK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0MRTK%E5%88%B0%E5%9C%BA%E6%99%AF"><span class="toc-number">3.5.</span> <span class="toc-text">添加MRTK到场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%BB%98%E8%AE%A4MRTK%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%B0%E5%9C%BA%E6%99%AF"><span class="toc-number">3.6.</span> <span class="toc-text">添加默认MRTK配置文件到场景</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E5%B9%B6%E9%83%A8%E7%BD%B2"><span class="toc-number">5.</span> <span class="toc-text">导出并部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA"><span class="toc-number">5.1.</span> <span class="toc-text">导出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">5.2.</span> <span class="toc-text">部署</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hololens开发-环境配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hololens开发-环境配置
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2023-12-08T16:00:00.000Z" itemprop="datePublished">2023-12-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/unity/">unity</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/unity/" rel="tag">unity</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 681(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>hololens是一款微软研发的混合现实(MR)眼镜。要在眼镜上开发自己的应用，就必须用到unity，visual studio以及相关库MRTK（mixed reality toolkit）。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="unity"><a href="#unity" class="headerlink" title="unity"></a>unity</h2><p>unity的安装主要就是通过unity hub 安装编辑器，最好选择（LTS）版本。然后模块安装上UWP和windows build support，如下图。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png"></p>
+<h2 id="visual-studio"><a href="#visual-studio" class="headerlink" title="visual studio"></a>visual studio</h2><p>vs的作用主要是将unity导出的文件在hololens进行部署。我们需要安装以下组件：<br>    .NET桌面开发<br>    使用C++的桌面开发<br>    通用windows平台开发<br>    使用unity的游戏开发<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/2.png"></p>
+<p>以下是需要勾选安装的组件<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/3.png"></p>
+<p><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/4.png"></p>
+<p><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/5.png"></p>
+<p><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/6.png"></p>
+<p>这里注意上图的windows11是按照自己电脑的windows版本，如果是win10就选win10的组件。</p>
+<h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><h2 id="切换平台"><a href="#切换平台" class="headerlink" title="切换平台"></a>切换平台</h2><p>打开unity新项目，点击文件，生成设置，选择UWP，点击切换平台。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/7.png"></p>
+<h2 id="导入-OpenXR"><a href="#导入-OpenXR" class="headerlink" title="导入 OpenXR"></a>导入 OpenXR</h2><p>配置MRTK需要openxr这个插件，要先导入一下。<br>通过<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/details.aspx?id=102778">MixedRealityFeatureTool</a>下载导入，<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/mixed-reality/develop/unity/welcome-to-mr-feature-tool">文档</a><br>选择项目的路径<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/9.png"><br>然后找到下图选项，等待下载，导入<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/openxr.png"></p>
+<h2 id="导入MRTK包"><a href="#导入MRTK包" class="headerlink" title="导入MRTK包"></a>导入MRTK包</h2><p>导入包的方式有两个，一个是通过GitHub下载，一个是使用微软的MixedRealityFeatureTool下载导入。</p>
+<h3 id="通过GitHub下载"><a href="#通过GitHub下载" class="headerlink" title="通过GitHub下载"></a>通过GitHub下载</h3><p><a target="_blank" rel="noopener" href="https://github.com/microsoft/MixedRealityToolkit-Unity/releases">地址这里</a><br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/8.png"><br>下载上述红框的就可以，也可以只下载必要的foundation，版本的话自己看着办。感觉没差。<br>然后把下载好的foundation包拖入项目中导入。</p>
+<h3 id="MixedRealityFeatureTool下载导入"><a href="#MixedRealityFeatureTool下载导入" class="headerlink" title="MixedRealityFeatureTool下载导入"></a>MixedRealityFeatureTool下载导入</h3><p>找到mixed reality toolkit，可以全选，不过通常只需要foundation。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/10.png"></p>
+<p>然后等待下载，导入。</p>
+<h2 id="配置MRTK"><a href="#配置MRTK" class="headerlink" title="配置MRTK"></a>配置MRTK</h2><p>导入MRTK包之后，弹出框：<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/11.png"></p>
+<p>我们使用推荐选项，点击unity OpenXR plugin。<br>然后到下一步。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/12.png"><br>跟着它说的做，<br>1.点击show sittings 按钮（下面那个Show XR plug-in xxxxxxx）<br>2.切换到UWP，选择HoloLens<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/13.png"><br>出现了很多警告，我们先让它自动修复一下，选择project validation ，fix all<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/14.png"><br>然后还有一个警告要我们手动修复<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/15.png"><br>点击openXR，添加一个interaction profile （我这里选择Microsoft hand interection profile）<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/16.png"><br>没有警告了，我们点击跳过，然后一路next，done就可以了<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/17.png"></p>
+<h2 id="添加MRTK到场景"><a href="#添加MRTK到场景" class="headerlink" title="添加MRTK到场景"></a>添加MRTK到场景</h2><p><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/18.png"><br>如图所示</p>
+<h2 id="添加默认MRTK配置文件到场景"><a href="#添加默认MRTK配置文件到场景" class="headerlink" title="添加默认MRTK配置文件到场景"></a>添加默认MRTK配置文件到场景</h2><p><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/19.png"><br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20.png"></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>我们可以导入MRTK的example包去测试一下环境是否已经配置完成<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/21.png"><br>HandInteractionExamples</p>
+<h1 id="导出并部署"><a href="#导出并部署" class="headerlink" title="导出并部署"></a>导出并部署</h1><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><p>在生成设置中选择好要导出的场景选择生成即可。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/22.png"></p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>找到我们导出的文件夹，用vs打开sin文件。<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/23.png"><br>按上图设置部署<br>这个时候电脑连接上hololens，启动部署<br>在部署过程中，如果是第一次连接HoloLens，将需要在HoloLens中设置打开开发者相关设置，输入相应的pin<br><img src="/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/24.png"><br>如无意外就能够部署成功！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="hololens开发-环境配置" target="_blank" rel="external">https://fxhblog.com/2023/12/09/hololens开发-环境配置/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/fxh803" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/bat.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/fxh803" target="_blank"><span class="text-dark">fxh</span><small class="ml-1x">programmer &amp; INTP</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" title="unity的URP渲染管线"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/fxh803" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    appId: 'w3h9uTMSSn7DfYUQ40KyFRlh-gzGzoHsz',
+    appKey: 'PEgjaPWlSzkNSwHuCP5G4nAL',
+    placeholder: '说点什么~(昵称输入QQ号自动获取QQ头像&amp;ID)',
+    avatar: '',
+    meta: meta,
+    pageSize: '10' || 10,
+    enableQQ: 'true'
+    
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
