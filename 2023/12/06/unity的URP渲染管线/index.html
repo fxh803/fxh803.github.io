@@ -21,47 +21,47 @@
   <meta name="description" content="什么是URP渲染管线，它有什么优点URP全称universal rendering pipeline。在unity中是一种渲染流程，与默认的build-in渲染管线不一样，它有很多优点。1.多平台，URP可以在不同的平台上保持一致的效果。2.高性能，相较于默认管线，性能更好。3.模块化，允许开发者更容易地定制和扩展渲染管线。作为入门我这个还没有感觉到。4.现代渲染特性，先较默认管线多出来很多渲染功">
 <meta property="og:type" content="article">
 <meta property="og:title" content="unity的URP渲染管线">
-<meta property="og:url" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/index.html">
+<meta property="og:url" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/index.html">
 <meta property="og:site_name" content="fxh的博客">
 <meta property="og:description" content="什么是URP渲染管线，它有什么优点URP全称universal rendering pipeline。在unity中是一种渲染流程，与默认的build-in渲染管线不一样，它有很多优点。1.多平台，URP可以在不同的平台上保持一致的效果。2.高性能，相较于默认管线，性能更好。3.模块化，允许开发者更容易地定制和扩展渲染管线。作为入门我这个还没有感觉到。4.现代渲染特性，先较默认管线多出来很多渲染功">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/1.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/2.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/3.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/4.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/5.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/6.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/7.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/8.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/9.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/10.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/11.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/12.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/13.gif">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/13.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/14.gif">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/15.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/16.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/17.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/18.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/19.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/20.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/21.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/22.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/23.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/24.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/25.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/26.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/27.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/28.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/1.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/2.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/3.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/4.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/5.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/6.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/7.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/8.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/9.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/10.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/11.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/12.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/13.gif">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/13.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/14.gif">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/15.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/16.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/17.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/18.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/19.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/20.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/21.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/22.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/23.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/24.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/25.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/26.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/27.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/28.png">
 <meta property="article:published_time" content="2023-12-05T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-12-09T06:35:41.423Z">
 <meta property="article:author" content="fxh">
 <meta property="article:tag" content="unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/1.png">
+<meta name="twitter:image" content="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/index.html">
+  <link rel="canonical" href="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/index.html">
   
     <link rel="alternate" href="/atom.xml" title="fxh的博客" type="application/atom+xml">
   
@@ -452,7 +452,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://fxhblog.com/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" title="unity的URP渲染管线" target="_blank" rel="external">https://fxhblog.com/2023/12/06/unity的URP渲染管线/</a>
+      <a href="https://fxh803.github.io/2023/12/06/unity%E7%9A%84URP%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/" title="unity的URP渲染管线" target="_blank" rel="external">https://fxh803.github.io/2023/12/06/unity的URP渲染管线/</a>
     </li>
     
     <li class="post-copyright-license">

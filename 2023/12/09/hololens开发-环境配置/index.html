@@ -21,43 +21,43 @@
   <meta name="description" content="简介hololens是一款微软研发的混合现实(MR)眼镜。要在眼镜上开发自己的应用，就必须用到unity，visual studio以及相关库MRTK（mixed reality toolkit）。 安装unityunity的安装主要就是通过unity hub 安装编辑器，最好选择（LTS）版本。然后模块安装上UWP和windows build support，如下图。 visual studio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hololens开发-环境配置">
-<meta property="og:url" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:url" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="fxh的博客">
 <meta property="og:description" content="简介hololens是一款微软研发的混合现实(MR)眼镜。要在眼镜上开发自己的应用，就必须用到unity，visual studio以及相关库MRTK（mixed reality toolkit）。 安装unityunity的安装主要就是通过unity hub 安装编辑器，最好选择（LTS）版本。然后模块安装上UWP和windows build support，如下图。 visual studio">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/2.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/3.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/4.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/5.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/6.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/7.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/9.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/openxr.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/8.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/10.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/11.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/12.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/13.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/14.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/15.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/16.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/17.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/18.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/19.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/21.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/22.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/23.png">
-<meta property="og:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/24.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/2.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/3.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/4.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/5.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/6.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/7.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/9.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/openxr.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/8.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/10.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/11.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/12.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/13.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/14.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/15.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/16.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/17.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/18.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/19.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/20.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/21.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/22.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/23.png">
+<meta property="og:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/24.png">
 <meta property="article:published_time" content="2023-12-08T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-12-09T08:18:22.081Z">
 <meta property="article:author" content="fxh">
 <meta property="article:tag" content="unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
+<meta name="twitter:image" content="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+  <link rel="canonical" href="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
   
     <link rel="alternate" href="/atom.xml" title="fxh的博客" type="application/atom+xml">
   
@@ -449,7 +449,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://fxhblog.com/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="hololens开发-环境配置" target="_blank" rel="external">https://fxhblog.com/2023/12/09/hololens开发-环境配置/</a>
+      <a href="https://fxh803.github.io/2023/12/09/hololens%E5%BC%80%E5%8F%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="hololens开发-环境配置" target="_blank" rel="external">https://fxh803.github.io/2023/12/09/hololens开发-环境配置/</a>
     </li>
     
     <li class="post-copyright-license">
